@@ -522,8 +522,33 @@
       ]
     },
     "_symbol": {
-      "type": "PATTERN",
-      "value": "((([-+][a-zA-Z.<>$%&=*\\/+\\-!?_'])|([a-zA-Z.<>$%&=*\\/!?_']))[\\w.<>$%&=*\\/+\\-!?_':]*)"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[\\/\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+              },
+              {
+                "type": "STRING",
+                "value": "/"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[\\/\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+              }
+            ]
+          }
+        }
+      ]
     },
     "symbol": {
       "type": "SYMBOL",
@@ -629,40 +654,28 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "[+-]"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
               "type": "STRING",
               "value": "0"
             },
             {
               "type": "PATTERN",
-              "value": "([1-9][0-9]*)"
+              "value": "([+-]?[1-9][0-9]*)"
             },
             {
               "type": "PATTERN",
-              "value": "0[xX]([0-9A-Fa-f]+)"
+              "value": "[+-]?0[xX]([0-9A-Fa-f]+)"
             },
             {
               "type": "PATTERN",
-              "value": "0([0-7]+)"
+              "value": "[+-]?0([0-7]+)"
             },
             {
               "type": "PATTERN",
-              "value": "([1-9][0-9]?)[rR]([0-9A-Za-z]+)"
+              "value": "[+-]?([1-9][0-9]?)[rR]([0-9A-Za-z]+)"
             },
             {
               "type": "PATTERN",
-              "value": "0[0-9]+"
+              "value": "[+-]?0[0-9]+"
             }
           ]
         },

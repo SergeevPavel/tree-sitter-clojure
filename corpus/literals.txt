@@ -15,10 +15,18 @@ $
 ->>
 --?
 a:a:a
++
+*
+/
+-
 
 ---
 
 (source_file
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
  (symbol)
  (symbol)
  (symbol)

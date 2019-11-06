@@ -1,5 +1,9 @@
+const SYMBOL = /[\/\-+.]|([\-+.][a-zA-Z*!_?$%&=<>'\-+.#:][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)/;
+const NS_SYMBOL = /[\-+.]|([\-+.][a-zA-Z*!_?$%&=<>'\-+.#:][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)/;
+
 module.exports = grammar({
   name: 'clojure',
+  // word: $ => $._symbol,
   extras: $ => [/[\s,]/, $.comment],
   rules: {
     source_file: $ => repeat($._form),
@@ -69,7 +73,8 @@ module.exports = grammar({
       $.vector,
       $.map
     ),
-    _symbol: $ => /((([-+][a-zA-Z.<>$%&=*/+\-!?_'])|([a-zA-Z.<>$%&=*/!?_']))[\w.<>$%&=*/+\-!?_':]*)/,
+
+    _symbol: $ => choice(SYMBOL, token(seq(NS_SYMBOL, "/", SYMBOL))),
     symbol: $ => $._symbol,
     keyword: $ => seq(choice(":", "::"), $._symbol),
     nil: $ => "nil",
@@ -80,12 +85,11 @@ module.exports = grammar({
     _any: $ => /\\./,
     _named: $ => /\\(newline|return|space|tab|formfeed|backspace)/,
     number: $ => choice($._int, $._ratio, $._float),
-    _int: $ => seq(optional(/[+-]/),
-                   choice("0", /([1-9][0-9]*)/,
-                          /0[xX]([0-9A-Fa-f]+)/,
-                          /0([0-7]+)/,
-                          /([1-9][0-9]?)[rR]([0-9A-Za-z]+)/,
-                          /0[0-9]+/),
+    _int: $ => seq(choice("0", /([+-]?[1-9][0-9]*)/,
+                          /[+-]?0[xX]([0-9A-Fa-f]+)/,
+                          /[+-]?0([0-7]+)/,
+                          /[+-]?([1-9][0-9]?)[rR]([0-9A-Za-z]+)/,
+                          /[+-]?0[0-9]+/),
                    optional("N")),
     _ratio: $ => /([-+]?[0-9]+)\/([0-9]+)/,
     _float: $ => /([-+]?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?)(M)?/,

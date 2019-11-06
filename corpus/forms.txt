@@ -1,0 +1,29 @@
+============================================
+Arithmetic
+============================================
+
+(+ 2 2)
+(+ x x)
+
+(* 2 2)
+(* x x)
+
+(/ 2 2)
+(/ x x)
+
+(- 2 2)
+(- x x)
+
+
+---
+
+(source_file
+  (list (symbol) (number) (number))
+  (list (symbol) (symbol) (symbol))
+  (list (symbol) (number) (number))
+  (list (symbol) (symbol) (symbol))
+  (list (symbol) (number) (number))
+  (list (symbol) (symbol) (symbol))
+  (list (symbol) (number) (number))
+  (list (symbol) (symbol) (symbol))
+  )
