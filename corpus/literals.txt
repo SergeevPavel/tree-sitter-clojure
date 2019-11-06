@@ -67,6 +67,31 @@ Characters
  (character))
 
 ============================================
+Regular expressions
+============================================
+
+#""
+#"abc"
+#"\\ \07 \077 \0377 \xFF \uFFFF \x{0} \x{FFFFF} \x{10FFFF} \N{white smiling face}"
+
+
+---
+
+(source_file
+ (regex (string))
+ (regex (string))
+ (regex (string (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence)
+                (escape_sequence))))
+
+============================================
 Booleans and nil
 ============================================
 
@@ -150,6 +175,10 @@ Numbers
 ---
 
 (source_file
+ (number)
+ (number)
+ (number)
+ (number)
  (number)
  (number)
  (number)
