@@ -29,7 +29,7 @@ module.exports = grammar({
       $.host_expression
     ),
     anonymous_function: $ => seq('#(', repeat($._form), ')'),
-    meta_data: $ => seq(choice('#^', '^'), choice($.map, $.symbol, $.keyword), $._form),
+    meta_data: $ => seq(choice('#^', '^'), choice($.map, $.symbol, $.keyword)),
     regex: $ => seq('#', $.string),
     var_quote: $ => seq('#\'', $.symbol),
     set: $ => seq('#{', repeat($._form), '}'),

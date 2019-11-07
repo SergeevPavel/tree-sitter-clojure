@@ -19,38 +19,34 @@ Anonymous Functions
 Meta Data
 ============================================
 
-^String a
-^:dynamic [1]
-^{:a 1} []
-#^String a
-#^:dynamic [1]
-#^{:a 1} []
+^String
+^:dynamic
+^{:a 1}
+#^String
+#^:dynamic
+#^{:a 1}
 (def ^String a 1)
 
 ---
 
 (source_file
  (meta_data
-  (symbol)
   (symbol))
  (meta_data
-  (keyword)
-  (vector (number)))
+  (keyword))
  (meta_data
-  (map (keyword) (number))
-  (vector))
+  (map (keyword) (number)))
  (meta_data
-  (symbol)
   (symbol))
  (meta_data
-  (keyword)
-  (vector (number)))
+  (keyword))
  (meta_data
-  (map (keyword) (number))
-  (vector))
+  (map (keyword) (number)))
  (list
   (symbol)
-  (meta_data (symbol) (symbol)) (number)))
+  (meta_data (symbol))
+  (symbol)
+  (number)))
 
 ============================================
 Regex

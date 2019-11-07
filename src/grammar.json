@@ -180,10 +180,6 @@
               "name": "keyword"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_form"
         }
       ]
     },
