@@ -18,12 +18,12 @@ Arithmetic
 ---
 
 (source_file
-  (list (symbol) (number) (number))
-  (list (symbol) (symbol) (symbol))
-  (list (symbol) (number) (number))
-  (list (symbol) (symbol) (symbol))
-  (list (symbol) (number) (number))
-  (list (symbol) (symbol) (symbol))
-  (list (symbol) (number) (number))
-  (list (symbol) (symbol) (symbol))
+  (function_call (function_symbol) (number) (number))
+  (function_call (function_symbol) (symbol) (symbol))
+  (function_call (function_symbol) (number) (number))
+  (function_call (function_symbol) (symbol) (symbol))
+  (function_call (function_symbol) (number) (number))
+  (function_call (function_symbol) (symbol) (symbol))
+  (function_call (function_symbol) (number) (number))
+  (function_call (function_symbol) (symbol) (symbol))
   )

@@ -10,7 +10,7 @@ Anonymous Functions
 (source_file
  (anonymous_function)
  (anonymous_function
-  (symbol)
+  (function_symbol)
   (symbol)
   (symbol)
   (symbol)))
@@ -42,8 +42,8 @@ Meta Data
   (keyword))
  (meta_data
   (map (keyword) (number)))
- (list
-  (symbol)
+ (function_call
+  (function_symbol)
   (meta_data (symbol))
   (symbol)
   (number)))
@@ -131,17 +131,17 @@ Macros
 ---
 
 (source_file
- (list
-  (symbol)
+ (function_call
+  (function_symbol)
   (symbol)
   (number))
- (list
+ (function_call
+  (function_symbol)
   (symbol)
-  (symbol)
-  (quote (list (symbol) (symbol) (symbol))))
+  (quote (function_call (function_symbol) (symbol) (symbol))))
  (backtick
-  (list
-   (symbol)
+  (function_call
+   (function_symbol)
    (symbol)
    (unquote (symbol))
    (symbol)
@@ -165,10 +165,10 @@ Reader Conditonals
 (source_file
  (reader_conditional (keyword) (vector))
  (reader_conditional
-  (keyword) (list (symbol) (symbol))
-  (keyword) (list (symbol) (symbol))
-  (keyword) (list (symbol) (symbol))
-  (keyword) (list (symbol) (symbol))))
+  (keyword) (function_call (function_symbol) (symbol))
+  (keyword) (function_call (function_symbol) (symbol))
+  (keyword) (function_call (function_symbol) (symbol))
+  (keyword) (function_call (function_symbol) (symbol))))
 
 ============================================
 Reader Conditonals Splicing
@@ -204,7 +204,7 @@ Comments
 (source_file
  (comment)
  (comment)
- (list (symbol) (symbol) (symbol)))
+ (function_call (function_symbol) (symbol) (symbol)))
 
 ============================================
 Host Expressions
@@ -217,5 +217,5 @@ Host Expressions
 (source_file
  (host_expression
   (symbol)
-  (list (symbol) (string)))
+  (function_call (function_symbol) (string)))
  (comment))

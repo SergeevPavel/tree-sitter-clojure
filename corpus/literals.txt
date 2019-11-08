@@ -142,10 +142,16 @@ Keywords
 :clojure.core/foo!
 ::clojure.core/foo
 ::foo
+:42
+::42
+:32foo/bar
 
 ---
 
 (source_file
+ (keyword)
+ (keyword)
+ (keyword)
  (keyword)
  (keyword)
  (keyword)
@@ -207,16 +213,16 @@ Numbers
 Lists
 ============================================
 
-(a b c)
+(1 2 3)
 ()
 
 ---
 
 (source_file
  (list
-  (symbol)
-  (symbol)
-  (symbol))
+  (number)
+  (number)
+  (number))
  (list))
 
 ============================================
