@@ -530,6 +530,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "namespaced_keyword"
+        },
+        {
+          "type": "SYMBOL",
           "name": "function_call"
         },
         {
@@ -579,51 +583,69 @@
       "type": "SYMBOL",
       "name": "_symbol"
     },
-    "keyword": {
-      "type": "TOKEN",
+    "keyword_prefix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": "::"
+        }
+      ]
+    },
+    "keyword_namespace": {
+      "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "STRING",
-                "value": "::"
-              }
-            ]
-          },
-          {
-            "type": "PATTERN",
-            "value": "[a-zA-Z*!_?$%&=<>'\\-+.#0-9][a-zA-Z*!_?$%&=<>'\\-+.#0-9:]*"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "/"
-                  },
-                  {
-                    "type": "PATTERN",
-                    "value": "[a-zA-Z*!_?$%&=<>'\\-+.#0-9][a-zA-Z*!_?$%&=<>'\\-+.#0-9:]*"
-                  }
-                ]
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[a-zA-Z*!_?$%&=<>'\\-+.#0-9][a-zA-Z*!_?$%&=<>'\\-+.#0-9:]*"
       }
+    },
+    "keyword_name": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z*!_?$%&=<>'\\-+.#0-9][a-zA-Z*!_?$%&=<>'\\-+.#0-9:]*"
+      }
+    },
+    "keyword": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_name"
+        }
+      ]
+    },
+    "namespaced_keyword": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_namespace"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "/"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_name"
+        }
+      ]
     },
     "nil": {
       "type": "STRING",
