@@ -30,7 +30,7 @@ module.exports = grammar({
       $.host_expression
     ),
     function_symbol: $ => prec(2, $._symbol),
-    anonymous_function: $ => seq('#(', seq(optional($.function_symbol), repeat($._form)), ')'),
+    anonymous_function: $ => seq('#(', repeat($._form), ')'),
     meta_data: $ => seq(choice('#^', '^'), choice($.map, $.symbol, $.keyword)),
     regex: $ => seq('#', $.string),
     var_quote: $ => seq('#\'', $.symbol),
@@ -72,7 +72,6 @@ module.exports = grammar({
       $.boolean,
       $.keyword,
       $.namespaced_keyword,
-      $.function_call,
       $.list,
       $.vector,
       $.map
@@ -103,7 +102,6 @@ module.exports = grammar({
                    optional("N")),
     _ratio: $ => /([-+]?[0-9]+)\/([0-9]+)/,
     _float: $ => /([-+]?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?)(M)?/,
-    function_call: $ => seq('(', $.function_symbol,  repeat($._form), ')'),
     list: $ => seq('(', repeat($._form), ')'),
     vector: $ => seq('[', repeat($._form), ']'),
     map: $ => seq(
