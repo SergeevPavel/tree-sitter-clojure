@@ -529,32 +529,65 @@
         }
       ]
     },
-    "_symbol": {
+    "_simple_symbol": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PATTERN",
-          "value": "[\\/\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+          "value": "[\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
         },
         {
-          "type": "TOKEN",
+          "type": "STRING",
+          "value": "/"
+        }
+      ]
+    },
+    "symbol_namespace": {
+      "type": "PATTERN",
+      "value": "[\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+    },
+    "symbol_name": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
+      }
+    },
+    "_namespaced_symbol": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "symbol_namespace"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
-              },
-              {
-                "type": "STRING",
-                "value": "/"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[\\/\\-+.]|([\\-+.][a-zA-Z*!_?$%&=<>'\\-+.#:][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\\-+.#:0-9]*)"
-              }
-            ]
+            "type": "STRING",
+            "value": "/"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "symbol_name"
+        }
+      ]
+    },
+    "_symbol": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_simple_symbol"
+          },
+          "named": true,
+          "value": "symbol_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_namespaced_symbol"
         }
       ]
     },

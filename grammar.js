@@ -1,5 +1,4 @@
-const SYMBOL = /[\/\-+.]|([\-+.][a-zA-Z*!_?$%&=<>'\-+.#:][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)/;
-const NS_SYMBOL = /[\-+.]|([\-+.][a-zA-Z*!_?$%&=<>'\-+.#:][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)/;
+const SYMBOL =   /[\-+.]|([\-+.][a-zA-Z*!_?$%&=<>'\-+.#:][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)|([a-zA-Z*!_?$%&=<>][a-zA-Z*!_?$%&=<>'\-+.#:0-9]*)/;
 const KEYWORD = /[a-zA-Z*!_?$%&=<>'\-+.#0-9][a-zA-Z*!_?$%&=<>'\-+.#0-9:]*/;
 
 module.exports = grammar({
@@ -76,8 +75,13 @@ module.exports = grammar({
       $.vector,
       $.map
     ),
-    _symbol: $ => choice(SYMBOL, token(seq(NS_SYMBOL, "/", SYMBOL))),
+    _simple_symbol: $ => choice(SYMBOL, "/"),
+    symbol_namespace: $ => SYMBOL,
+    symbol_name: $ => token.immediate(SYMBOL),
+    _namespaced_symbol: $ => seq($.symbol_namespace, token.immediate("/"), $.symbol_name),
+    _symbol: $ => choice(alias($._simple_symbol, $.symbol_name), $._namespaced_symbol),
     symbol: $ => $._symbol,
+
     keyword_prefix: $ => choice(":", "::"),
     keyword_namespace: $ => token.immediate(KEYWORD),
     keyword_name: $ => token.immediate(KEYWORD),
